@@ -121,7 +121,7 @@ export default function Register() {
               <Stack pt={6}>
                 <Text align={"center"}>
                   Ready to log in again?{" "}
-                  <Link color={"blue.400"} as={routerLink} to={LOGIN}>
+                  <Link color={"#27ae60"} as={routerLink} to={LOGIN}>
                     Login
                   </Link>
                 </Text>
