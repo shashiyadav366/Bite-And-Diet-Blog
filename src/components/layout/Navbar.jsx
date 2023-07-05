@@ -78,8 +78,8 @@ export default function Navbar() {
               >
                 <img
                   src={logo}
-                  width="130"
-                  height="130"
+                  width="120"
+                  height="120"
                   className="d-inline-block align-top"
                   alt="React Bootstrap logo"
                 />
