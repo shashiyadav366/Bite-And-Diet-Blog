@@ -48,7 +48,7 @@ export default function Register() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} minW={500} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
             Come on in!
@@ -61,7 +61,7 @@ export default function Register() {
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
           boxShadow={"lg"}
-          p={8}
+          p={8}          
         >
           <form onSubmit={handleSubmit(handleRegister)}>
             <Stack spacing={4}>
@@ -106,10 +106,10 @@ export default function Register() {
                   <Button
                     loadingText='Submitting'
                     size='lg'
-                    bg={"blue.400"}
+                    bg={"#27ae60"}
                     color={"white"}
                     _hover={{
-                      bg: "blue.500",
+                      bg: "#27ae60",
                     }}
                     type='submit'
                     isLoading={isLoading}
