@@ -48,7 +48,7 @@ export default function Login() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} minW={500} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Let's unlock</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
@@ -99,15 +99,15 @@ export default function Login() {
                   justify={"space-between"}
                 >
                   <Checkbox>Remember me</Checkbox>
-                  <Link as={routerLink} to={ROOT} color={"blue.400"}>
+                  <Link as={routerLink} to={ROOT} color={"#27ae60"}>
                     Explore blogs?
                   </Link>
                 </Stack>
                 <Button
-                  bg={"blue.400"}
+                  bg={"#27ae60"}
                   color={"white"}
                   _hover={{
-                    bg: "blue.500",
+                    bg: "#27ae60",
                   }}
                   type="submit"
                   isLoading={isLoading}
@@ -120,7 +120,7 @@ export default function Login() {
             <Stack pt={6}>
               <Text align={"center"}>
                 Newcomer here? Join the club!{" "}
-                <Link color={"blue.400"} as={routerLink} to={REGISTER}>
+                <Link color={"#27ae60"} as={routerLink} to={REGISTER}>
                   Register
                 </Link>
               </Text>
