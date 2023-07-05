@@ -47,17 +47,19 @@ const SinglePost = ({ post }) => {
           </Link>
         </Box>
         <Heading fontSize="xl" marginTop="2">
+          {post.title}
+        </Heading>
+        <Text as="p" fontSize="md" marginTop="2">
+          {post.desc.substring(0, 150)}...
           <Link
             textDecoration="none"
             _hover={{ textDecoration: "none" }}
             as={routerLink}
             to={`/posts/${post?.id}`}
+            color={"red"}
           >
-            {post.title}
+            Read More
           </Link>
-        </Heading>
-        <Text as="p" fontSize="md" marginTop="2">
-          {post.desc.substring(0, 150)}...
         </Text>
         <Box mt={"10px"}>
           <Flex align={"center"}>
