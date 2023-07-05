@@ -105,16 +105,16 @@ export default function SimpleCard({ onModalClose }) {
               <Stack spacing={10}>
                 <Button
                   mt={"10px"}
-                  bg={"blue.400"}
+                  bg={"#27ae60"}
                   color={"white"}
                   _hover={{
-                    bg: "blue.500",
+                    bg: "#27ae60",
                   }}
                   type="submit"
                   isLoading={isLoading}
                   loadingText={"Loading..."}
                 >
-                  Hit the Big Blue Button! POST
+                  Hit the Big Green Button! POST
                 </Button>
               </Stack>
             </form>
