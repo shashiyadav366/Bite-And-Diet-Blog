@@ -57,8 +57,7 @@ export default function Navbar() {
     { id: 3, path: REGISTER, name: "Create an account" },
   ];
   return (
-    <Container maxW="1300px">
-      {/* <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}> */}
+    <Container maxW="100%" padding="0">
       <Box bg={useColorModeValue("gray.100", "#013220")} px={4}>
         <Flex h={20} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
@@ -130,7 +129,6 @@ export default function Navbar() {
             {user ? (
               <Button
                 variant={"solid"}
-                // colorScheme={"teal"}
                 background={"#27ae60"}
                 size={"sm"}
                 mr={4}
