@@ -149,7 +149,7 @@ export default function SimpleCard({ onModalClose }) {
                       type="file"
                       {...register("imageUrl", { required: true })}
                       onChange={handleChange}
-                      accept="/image/*"
+                      accept="image/*"
                     />
 
                     {/* <p>{percent} "% done"</p> */}
