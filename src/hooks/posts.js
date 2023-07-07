@@ -98,3 +98,42 @@ export function useDeletePost(id) {
 
   return { deletePost, isLoading };
 }
+
+export function useEditPost() {
+  const [isLoading, setLoading] = useState(false);
+  const toast = useToast();
+
+  async function editPost(post) {
+    setLoading(true);
+    const { id, title, desc } = post;
+    const docRef = doc(db, "posts", id);
+
+    try {
+      await updateDoc(docRef, {
+        title,
+        desc,
+      });
+      toast({
+        title: "Post updated successfully!",
+        status: "success",
+        isClosable: true,
+        position: "top",
+        duration: 5000,
+      });
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Failed to update post",
+        description: "An error occurred while updating the post.",
+        status: "error",
+        isClosable: true,
+        position: "top",
+        duration: 5000,
+      });
+    }
+
+    setLoading(false);
+  }
+
+  return { editPost, isLoading };
+}
