@@ -14,10 +14,15 @@ import {
   FormHelperText,
   useToast,
 } from "@chakra-ui/react";
+
+import { useState } from "react";
+import { storage } from "../../lib/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextareaAutosize from "react-textarea-autosize";
 import { useForm } from "react-hook-form";
 import { useAddPost } from "../../hooks/posts";
 import { useAuth } from "../../hooks/auths";
+
 export default function SimpleCard({ onModalClose }) {
   const { addPost, isLoading } = useAddPost();
   const { user, authLoading } = useAuth();
@@ -29,15 +34,86 @@ export default function SimpleCard({ onModalClose }) {
   } = useForm();
   const toast = useToast();
 
-  const handleAddPost = (data) => {
-    addPost({
-      uid: user.id,
-      title: data.title,
-      desc: data.desc,
-      imageUrl: data.imageUrl,
+  // State to store uploaded file
+  const [file, setFile] = useState("");
+  const [imgUrl, setimgUrl] = useState("");
+  // progress
+  const [percent, setPercent] = useState(0);
+  // Handle file upload event and update state
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
+  const handleAddPost = async (data) => {
+    if (!file) {
+      alert("Please upload an image first!");
+      return; // Stop execution if no file is uploaded
+    }
+
+    const storageRef = ref(storage, `/files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // Show loading toast
+    const toastId = toast({
+      title: "Uploading Post",
+      description: "Please wait while your post is being uploaded...",
+      status: "info",
+      duration: null,
+      isClosable: false,
     });
-    reset();
-    onModalClose();
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      },
+      (err) => {
+        console.log(err);
+        // Hide loading toast on error
+        toast.update(toastId, {
+          status: "error",
+          title: "Error",
+          description: "An error occurred while uploading the post.",
+          isClosable: true,
+          duration: 5000,
+        });
+      },
+      async () => {
+        try {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          setimgUrl(url);
+          addPost({
+            uid: user.id,
+            title: data.title,
+            desc: data.desc,
+            imageUrl: url, // Use the url from the state variable
+          });
+          reset();
+          onModalClose();
+          // Hide loading toast and show success toast
+          toast.update(toastId, {
+            status: "success",
+            title: "Post Uploaded",
+            description: "Your post has been successfully uploaded.",
+            isClosable: true,
+            duration: 5000,
+          });
+        } catch (error) {
+          console.log(error);
+          // Hide loading toast and show error toast
+          toast.update(toastId, {
+            status: "error",
+            title: "Error",
+            description: "An error occurred while uploading the post.",
+            isClosable: true,
+            duration: 5000,
+          });
+        }
+      }
+    );
   };
 
   return (
@@ -66,29 +142,17 @@ export default function SimpleCard({ onModalClose }) {
               </FormControl>
               <FormControl id="image">
                 <FormLabel> Image URL</FormLabel>
-                <Input
-                  type="url"
-                  {...register("imageUrl", { required: true })}
-                />
+
                 <FormHelperText>
-                  <Link
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        "https://picsum.photos/200/300/"
-                      );
-                      toast({
-                        title: "URL Copied",
-                        status: "success",
-                        isClosable: true,
-                        position: "top",
-                        duration: 2000,
-                      });
-                    }}
-                  >
-                    Eg: https://picsum.photos/200/300/
-                  </Link>
                   <div>
-                    <Text as="mark">Copy image link by click</Text>
+                    <input
+                      type="file"
+                      {...register("imageUrl", { required: true })}
+                      onChange={handleChange}
+                      accept="/image/*"
+                    />
+
+                    {/* <p>{percent} "% done"</p> */}
                   </div>
                 </FormHelperText>
               </FormControl>
