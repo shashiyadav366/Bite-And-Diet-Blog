@@ -140,8 +140,8 @@ export default function SimpleCard({ onModalClose }) {
                   Eg: The Art of Effective Communication
                 </FormHelperText>
               </FormControl>
-              <FormControl id="image">
-                <FormLabel> Image URL</FormLabel>
+              <FormControl id="image"  py={4}>
+                <FormLabel>Choose Image</FormLabel>
 
                 <FormHelperText>
                   <div>
