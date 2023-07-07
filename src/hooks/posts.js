@@ -31,13 +31,13 @@ export function useAddPost() {
       date: Date.now(),
       likes: [],
     });
-    toast({
-      title: "Post added successfully!",
-      status: "success",
-      isClosable: true,
-      position: "top",
-      duration: 5000,
-    });
+    // toast({
+    //   title: "Post added successfully!",
+    //   status: "success",
+    //   isClosable: true,
+    //   position: "top",
+    //   duration: 5000,
+    // });
     setLoading(false);
   }
 
