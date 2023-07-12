@@ -77,9 +77,9 @@ export default function CurrentPost() {
                     />
                   </Link>
                 </Box>
-                <Text as='p' fontSize='md' marginTop='2'>
-                  {nl2br((currentPost.desc))}
-                </Text>
+               <Text as='p' fontSize='md' marginTop='2' style={{whiteSpace:'pre-line'}}>
+                  {currentPost.desc}
+                </Text>                   
               </Box>
             </GridItem>
           </Grid>
