@@ -78,7 +78,7 @@ export default function CurrentPost() {
                   </Link>
                 </Box>
                 <Text as='p' fontSize='md' marginTop='2'>
-                  {currentPost.desc}
+                  {nl2br((currentPost.desc))}
                 </Text>
               </Box>
             </GridItem>
